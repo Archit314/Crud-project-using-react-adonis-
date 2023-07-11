@@ -9,23 +9,28 @@ export default function CreateUser() {
     phoneNumber: "",
   };
 
+  // use state hook for initial data and for updated data
   const [data, setData] = useState(initialData);
 
+  // handling input values from the form
   const handleInputValue = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
     setData({ ...data, [name]: value });
   };
 
+  // handling submit form data
   let handleSubmit = async (e) => {
     e.preventDefault();
 
+    // data that will be post to create user API
     let postData = {
       name: data.name,
       email: data.email,
       phoneNumber: data.phoneNumber,
     };
     try {
+      // calling third create user api
       let res = await axios.post("http://127.0.0.1:3333/create", postData);
       // let resJson = await res.json();
       console.log(res);
@@ -44,6 +49,7 @@ export default function CreateUser() {
   };
   return (
     <>
+      {/* creating form so that user can enter his/her details  */}
       <div className="container mt-4">
         <div className="container">
           <h1>Fill the below form to create user</h1>
