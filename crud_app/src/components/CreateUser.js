@@ -9,7 +9,7 @@ export default function CreateUser() {
     phoneNumber: "",
   };
 
-  // use state hook for initial data and for updated data
+  // Use state hook for initial data and for updated data
   const [data, setData] = useState(initialData);
 
   // handling input values from the form
@@ -19,18 +19,18 @@ export default function CreateUser() {
     setData({ ...data, [name]: value });
   };
 
-  // handling submit form data
+  // Handling submit form data
   let handleSubmit = async (e) => {
     e.preventDefault();
 
-    // data that will be post to create user API
+    // Data that will be post to create user API
     let postData = {
       name: data.name,
       email: data.email,
       phoneNumber: data.phoneNumber,
     };
     try {
-      // calling third create user api
+      // Calling third create user api
       let res = await axios.post("http://127.0.0.1:3333/create", postData);
       // let resJson = await res.json();
       console.log(res);
