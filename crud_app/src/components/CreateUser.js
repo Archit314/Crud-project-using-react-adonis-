@@ -30,12 +30,12 @@ export default function CreateUser() {
       // let resJson = await res.json();
       console.log(res);
       if (res.status === 200) {
-        console.log(`user created successfully`);
+        console.log(`New user created successfully`);
         // setName("");
         // setEmail("");
         // setMessage("User created successfully");
       } else {
-        console.log(`error`);
+        console.log(`Some error occured.`);
         // setMessage("Some error occured");
       }
     } catch (err) {
