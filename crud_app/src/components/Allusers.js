@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 export default function Allusers() {
   const [customers, setCustomers] = useState([]);
 
+  // this method is used for fetching all the customers.
   useEffect(() => {
     const fetchData = async () => {
       try {
