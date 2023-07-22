@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import UpdateModel from "../Model/UpdateModel";
 
 export default function Allusers() {
   const [customers, setCustomers] = useState([]);
+  const [openModel, setOpenModel] = useState(false);
+  const [customerId, setCustomerId] = useState();
 
   // this method is used for fetching all the customers.
   useEffect(() => {
@@ -46,50 +49,65 @@ export default function Allusers() {
   };
   return (
     <>
+      <div id="users">
+        <div className="container">
+          <div>
+            <h1>All users</h1>
+          </div>
+          <div className="row">
+            <div className="col">
+              <h3>NAME</h3>
+            </div>
+            <div className="col">
+              <h3>EMAIL</h3>
+            </div>
+            <div className="col">
+              <h3>Phone number</h3>
+            </div>
+            <div className="col">
+              <h3>User action</h3>
+            </div>
+          </div>
+          <hr />
+          {customers.map((customer) => (
+            <div className="row" key={customer.id}>
+              <div className="col">
+                <h3>{customer.name}</h3>
+              </div>
+              <div className="col">
+                <h3>{customer.email}</h3>
+              </div>
+              <div className="col">
+                <h3>{customer.number}</h3>
+              </div>
+              <div className="col">
+                <button
+                  type="button"
+                  className="btn btn-primary mx-2"
+                  onClick={() => {
+                    setOpenModel(true);
+                    setCustomerId(customer.id);
+                  }}
+                  id="editBtn"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => customerDelete(customer.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
       <div className="container">
-        <div>
-          <h1>All users</h1>
-        </div>
-        <div className="row">
-          <div className="col">
-            <h3>NAME</h3>
-          </div>
-          <div className="col">
-            <h3>EMAIL</h3>
-          </div>
-          <div className="col">
-            <h3>Phone number</h3>
-          </div>
-          <div className="col">
-            <h3>User action</h3>
-          </div>
-        </div>
-        <hr />
-        {customers.map((customer) => (
-          <div className="row" key={customer.id}>
-            <div className="col">
-              <h3>{customer.name}</h3>
-            </div>
-            <div className="col">
-              <h3>{customer.email}</h3>
-            </div>
-            <div className="col">
-              <h3>{customer.number}</h3>
-            </div>
-            <div className="col">
-              <button type="button" className="btn btn-primary mx-2">
-                Edit
-              </button>
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => customerDelete(customer.id)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+        {openModel && customerId !== null && (
+          <UpdateModel closeModel={setOpenModel} customerId={customerId} />
+        )}
       </div>
     </>
   );
